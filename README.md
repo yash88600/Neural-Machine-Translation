@@ -1,4 +1,6 @@
 # Neural-Machine-Translation
+**language models to convert English text to Spanish text**
+
 In Machine Translation, our goal is to convert a sentence from the source language (e.g. English) to the
 target language (e.g. Spanish). In this repository, we implement three different implementations to build a Neural Machine Translation (NMT) system. 
 1. **Model RepeatVector** - One-shot translation using Repeatvector 
@@ -10,16 +12,16 @@ To check out the results from respective models,see the results text files.
 One-shot translation model where the input text is encoded to a vector through embedding and a RNN layer(in our case LSTM).Then this vector is repeated for Ty(number of output time steps)
 We trained this model on anki dataset which has relatively shorter sentences ,so we didn't use attention.
 
-![Model RepeatVector](https://github.com/thebeyonder001/Neural-Machine-Translation/blob/master/src/model_repeatvector.jpeg)
+![Model RepeatVector](https://github.com/yash88600/Neural-Machine-Translation/blob/master/src/model_repeatvector.jpeg)
 
 We tried to tweak and mess around with the model parameters and tanulated few results:
 
-![Model RepeatVector Results](https://github.com/thebeyonder001/Neural-Machine-Translation/blob/master/src/model_repeatvector_comparisons.jpeg)
+![Model RepeatVector Results](https://github.com/yash88600/Neural-Machine-Translation/blob/master/src/model_repeatvector_comparisons.jpeg)
 
 ## Model Seq2seq 
 Specifically, an seq2seq model first reads the source sentence using an encoder to build a "thought" vector, a sequence of numbers that represents the sentence meaning; a decoder, then, processes the sentence vector to emit a translation. This is often referred to as the encoder-decoder architecture. In this manner, NMT addresses the local translation problem in the traditional phrase-based approach: it can capture long-range dependencies in languages, e.g., gender agreements; syntax structures; etc.
 
-![Model concept](https://github.com/thebeyonder001/Neural-Machine-Translation/blob/master/src/seq2seq_representation.jpg)
+![Model concept](https://github.com/yash88600/Neural-Machine-Translation/blob/master/src/seq2seq_representation.jpg)
 
 **Embedding**
 Given the categorical nature of words, the model must first look up the source and target embeddings to retrieve the corresponding word representations. For this embedding layer to work, a vocabulary is first chosen for each language. Note that one can choose to initialize embedding weights with pretrained word representations such as word2vec or Glove vectors. In general, given a large amount of training data we can learn these embeddings from scratch.
@@ -29,16 +31,16 @@ Once retrieved, the word embeddings are then fed as input into the main network,
 **Decoder**
 The decoder also needs to have access to the source information, and one simple way to achieve that is to initialize it with the last hidden state of the encoder, encoder_state
 
-![Model seq2seq](https://github.com/thebeyonder001/Neural-Machine-Translation/blob/master/src/model_seq2seq.jpeg)
+![Model seq2seq](https://github.com/yash88600/Neural-Machine-Translation/blob/master/src/model_seq2seq.jpeg)
 
 This model already worked fine with anki dataset so we added attention (luong style) to try it on data with longer sentences.
 Luong Style Attention:
 
-![Luong attention](https://github.com/thebeyonder001/Neural-Machine-Translation/blob/master/src/attention.JPG)
+![Luong attention](https://github.com/yash88600/Neural-Machine-Translation/blob/master/src/attention.JPG)
 ## Model Seq2seq1
 We tweaked with the original encoder-decoder structure by concatenating the encoded vector with the decoder embeddings and then gave processed it similarly as in the previous model.
 
-![Model seq2seq1](https://github.com/thebeyonder001/Neural-Machine-Translation/blob/master/src/model_seq2seq1.jpeg)
+![Model seq2seq1](https://github.com/yash88600/Neural-Machine-Translation/blob/master/src/model_seq2seq1.jpeg)
 
 ## Data Used
 1. Anki - http://www.manythings.org/anki/spa-eng.zip
